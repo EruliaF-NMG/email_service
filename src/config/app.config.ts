@@ -5,6 +5,7 @@ const baseUrl: string = process.env.APP_URL || `http://localhost:${port}/`;
 const apiVersion: string = 'api/v1/';
 const mongoUri = 'mongodb://mongo_email:27017/email_db';
 const redisPort:number = Number(process.env.REDIS_PORT) || 6379;
+const storeKey:string = "EMAIL_TASKS";
 
 const errorMessageList :any = {
     required: 'Please enter the :attribute',
@@ -19,6 +20,14 @@ const errorMessageList :any = {
     checkDroneIsReady: 'selected drone should be in IDLE or LOADING status',
 };
 
+const emailConfig = {
+    service: 'gmail',
+    auth: {
+      user: 'eruliaf.nmg@gmail.com',
+      pass: 'kjwmdeevrbakoxdd',
+    },
+};
+
 export {
     currentEnv,
     port,
@@ -26,5 +35,7 @@ export {
     apiVersion,
     mongoUri,
     redisPort,
-    errorMessageList
+    errorMessageList,
+    storeKey,
+    emailConfig
 }
