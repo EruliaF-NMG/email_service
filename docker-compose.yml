@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  mongo_email:
+    image: mongo:latest
+    container_name: mongo_email
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE_NAME}
+    env_file:
+      - ./.env
+    volumes:
+      - mongo_email:/data/db
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+  redis:
+    image: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    volumes:
+      - redis:/data/cache
+    restart: always
+    entrypoint: redis-server --appendonly yes
+  email-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo_email
+      - redis
+    links:
+      - mongo_email
+      - redis  
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - NODE_PORT=${NODE_PORT}
+    ports:
+      - ${NODE_PORT}:${NODE_PORT}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: "npm run serve"
+volumes:
+  mongo_email:
+  redis:
