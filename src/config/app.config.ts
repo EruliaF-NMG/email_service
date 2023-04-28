@@ -6,6 +6,7 @@ const apiVersion: string = 'api/v1/';
 const mongoUri = 'mongodb://mongo_email:27017/email_db';
 const redisPort:number = Number(process.env.REDIS_PORT) || 6379;
 const storeKey:string = "EMAIL_TASKS";
+const attemptedCount: number = 5;
 
 const errorMessageList :any = {
     required: 'Please enter the :attribute',
@@ -37,5 +38,6 @@ export {
     redisPort,
     errorMessageList,
     storeKey,
-    emailConfig
+    emailConfig,
+    attemptedCount
 }

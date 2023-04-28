@@ -6,6 +6,7 @@ import Bootstrap from "./bootstrap/bootstrap";
 import mongoose from 'mongoose';
 import './helpers/cron-runner-helpers';
 import queueService from './core/service/queue-service';
+import socketService from './core/service/socket-service';
 
 const server = http.createServer(Bootstrap.instance);
 
@@ -23,6 +24,8 @@ mongoose.connection.on('error', () => {
 queueService.init().catch(() => {
   throw new Error( `Unable to connect to redis` );
 });
+
+socketService.init(server);
 
 server.listen(port, () => {
   console.log(`Server is listening on :${port}`);

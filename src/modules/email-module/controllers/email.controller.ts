@@ -21,7 +21,7 @@ export default class EmailController {
     @Get()
     async getAll(request: Request, response: Response) {
         try{
-            const data = await this._emailService.pagination(request.query);
+            const data = await this._emailService.find();
             if(data) return response.status(successGetResponse.httpStatus).json(generateResponse(successGetResponse,data));
             else response.status(exceptionOccurredResponse.httpStatus).json(generateErrorResponse(exceptionOccurredResponse,"",'Something went wrong please try again'));
         } catch(ex){

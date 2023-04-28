@@ -11,7 +11,6 @@ export const sendEmail = async (emailTask:EmailTask) : Promise<boolean> =>{
             subject: emailTask.subject,
             html: `<div>${emailTask.body}</div>`
         };
-        console.log("mailDetails---",mailDetails);
         const info = await mailTransporter.sendMail(mailDetails);
         return true;
     } catch (ex) {
