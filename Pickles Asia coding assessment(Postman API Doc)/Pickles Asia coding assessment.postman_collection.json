@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "8c8a9db0-4cf4-4e98-a737-acf2d0c563cf",
+		"name": "Pickles Asia coding assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Emails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\" :\"HI2\",\n    \"body\":\"Test email2\",\n    \"send_to\":\"nisal.nmg@gmail.com\",\n    \"from_email\":\"nisal@ascentic.se\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"email"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
